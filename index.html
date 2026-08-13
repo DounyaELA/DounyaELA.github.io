@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dounya El Aoud — Business Intelligence Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bleu:       #1B3A5C;
+      --bleu-med:   #2A5F8F;
+      --bleu-clair: #EAF2FB;
+      --accent:     #3B82C4;
+      --texte:      #1A1A2E;
+      --gris:       #5A6475;
+      --gris-clair: #F2F5F9;
+      --blanc:      #FFFFFF;
+      --bordure:    #D8E4F0;
+      --tag-bg:     #DBEAf8;
+      --tag-txt:    #1B3A5C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--texte);
+      background: var(--blanc);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ======= NAV ======= */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--bordure);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 58px;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--bleu);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gris);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ======= HERO ======= */
+    .hero {
+      padding: 130px 2rem 80px;
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--bleu);
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+    .hero-text .titre {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .hero-text p {
+      color: var(--gris);
+      font-size: 1rem;
+      max-width: 520px;
+      margin-bottom: 1.8rem;
+    }
+    .hero-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.87rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--bleu);
+      color: var(--blanc);
+      border: 2px solid var(--bleu);
+    }
+    .btn-primary:hover { background: var(--bleu-med); border-color: var(--bleu-med); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--bleu);
+      border: 2px solid var(--bleu);
+    }
+    .btn-secondary:hover { background: var(--bleu-clair); }
+
+    .hero-avatar {
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bleu-clair) 0%, var(--bordure) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      color: var(--bleu);
+      flex-shrink: 0;
+    }
+
+    /* ======= BANDEAU AVANT/APRES ======= */
+    .bandeau {
+      background: var(--gris-clair);
+      border-top: 1px solid var(--bordure);
+      border-bottom: 1px solid var(--bordure);
+      padding: 2.5rem 2rem;
+    }
+    .bandeau-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .bandeau-bloc {
+      padding: 1.4rem 1.6rem;
+      border-radius: 8px;
+      background: var(--blanc);
+      border: 1px solid var(--bordure);
+    }
+    .bandeau-bloc h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+    .bandeau-bloc p { font-size: 0.9rem; color: var(--gris); }
+
+    /* ======= SECTIONS GENERIQUES ======= */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem;
+      color: var(--bleu);
+      margin-bottom: 0.4rem;
+    }
+    .section-sub {
+      color: var(--gris);
+      font-size: 0.92rem;
+      margin-bottom: 2.4rem;
+    }
+    .divider {
+      width: 40px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 2.4rem;
+    }
+
+    /* ======= COMPETENCES ======= */
+    #competences { background: var(--blanc); }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .comp-bloc h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bleu-med);
+      margin-bottom: 0.8rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-txt);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.25rem 0.7rem;
+      border-radius: 4px;
+      letter-spacing: 0.01em;
+    }
+    .tag.soft {
+      background: transparent;
+      border: 1px solid var(--bordure);
+      color: var(--gris);
+    }
+
+    /* ======= PROJETS ======= */
+    #projets { background: var(--gris-clair); }
+    .projets-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+    .projet-card {
+      background: var(--blanc);
+      border: 1px solid var(--bordure);
+      border-radius: 8px;
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .projet-card:hover {
+      box-shadow: 0 4px 20px rgba(27,58,92,0.1);
+      transform: translateY(-2px);
+    }
+    .projet-card h3 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--bleu);
+      line-height: 1.35;
+    }
+    .projet-card p {
+      font-size: 0.82rem;
+      color: var(--gris);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .projet-card .tags { margin-top: auto; }
+    .projet-card a {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .projet-card a:hover { text-decoration: underline; }
+    .badge-en-cours {
+      display: inline-block;
+      background: #FFF3CD;
+      color: #7A5800;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ======= VEILLE ======= */
+    #veille { background: var(--blanc); }
+    .veille-intro {
+      font-size: 0.92rem;
+      color: var(--gris);
+      margin-bottom: 1.8rem;
+      max-width: 640px;
+    }
+    .veille-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+    }
+    .veille-card {
+      border: 1px solid var(--bordure);
+      border-radius: 8px;
+      padding: 1.3rem 1.5rem;
+    }
+    .veille-card h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--bleu);
+      margin-bottom: 0.4rem;
+    }
+    .veille-card p { font-size: 0.83rem; color: var(--gris); line-height: 1.55; }
+    .veille-retenu {
+      display: inline-block;
+      background: #D7F5D7;
+      color: #1A5C1A;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-top: 0.5rem;
+    }
+    .veille-ecarte {
+      display: inline-block;
+      background: #FFD7D7;
+      color: #7A1A1A;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-top: 0.5rem;
+    }
+
+    /* ======= LIVRABLES ======= */
+    #livrables { background: var(--gris-clair); }
+    .livrables-list { display: flex; flex-direction: column; gap: 0; }
+    .livrable-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .livrable-row:first-child { border-top: 1px solid var(--bordure); }
+    .livrable-nom {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--texte);
+    }
+    .livrable-lien {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .livrable-lien:hover { text-decoration: underline; }
+
+    /* ======= CONTACT ======= */
+    #contact {
+      background: var(--bleu);
+      color: var(--blanc);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    #contact .section-title { color: var(--blanc); margin-bottom: 0.6rem; }
+    #contact p { color: rgba(255,255,255,0.75); margin-bottom: 2rem; font-size: 0.95rem; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .contact-links a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.3rem;
+      border-radius: 6px;
+      font-size: 0.87rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      color: var(--blanc);
+      transition: background 0.2s;
+    }
+    .contact-links a:hover { background: rgba(255,255,255,0.15); }
+
+    /* ======= FOOTER ======= */
+    footer {
+      background: #0F2236;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 1.2rem 2rem;
+      font-size: 0.78rem;
+    }
+
+    /* ======= RESPONSIVE ======= */
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .bandeau-inner { grid-template-columns: 1fr; }
+      .comp-grid { grid-template-columns: 1fr; }
+      .projets-grid { grid-template-columns: 1fr; }
+      .veille-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .projet-card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Dounya El Aoud</a>
+  <ul class="nav-links">
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#competences">Competences</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#veille">Veille</a></li>
+    <li><a href="#livrables">Livrables P10</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="profil" style="padding: 0;">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="titre">Business Intelligence Analyst</p>
+      <h1>Dounya El Aoud</h1>
+      <p>
+        Consultante data en formation, certifiee Business Intelligence Analyst (OpenClassrooms, sept. 2026).
+        Formee au pilotage de projets data de bout en bout : de la structuration du besoin metier
+        a la production de dashboards Power BI, en passant par l'analyse Python et la veille technologique.
+        Basee a Mulhouse, disponible en Alsace (Mulhouse / Strasbourg).
+      </p>
+      <div class="hero-btns">
+        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn btn-secondary">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-avatar">D</div>
+  </div>
+</section>
+
+<!-- BANDEAU AVANT / AUJOURD'HUI -->
+<div class="bandeau">
+  <div class="bandeau-inner">
+    <div class="bandeau-bloc">
+      <h3>Avant la formation</h3>
+      <p>
+        Issue d'un background commerce international (Bac+5, specialite Textile et Cuir),
+        j'avais une vision operationnelle des donnees : les rapports, les exports, les tableaux Excel.
+        La donnee etait un livrable, pas un outil de decision.
+      </p>
+    </div>
+    <div class="bandeau-bloc">
+      <h3>Aujourd'hui</h3>
+      <p>
+        Je positionne la donnee comme levier metier : cadrer un besoin, choisir les bons outils,
+        construire des livrables fiables, et expliquer mes choix a des interlocuteurs non techniques.
+        La posture de consultant compte autant que la maitrise technique.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <div class="section-inner">
+    <h2 class="section-title">Competences</h2>
+    <div class="divider"></div>
+    <div class="comp-grid">
+      <div class="comp-bloc">
+        <h4>Langages et librairies</h4>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="comp-bloc">
+        <h4>Data Visualisation et BI</h4>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Power Query</span>
+          <span class="tag">Excel</span>
+        </div>
+      </div>
+      <div class="comp-bloc" style="margin-top:1.2rem;">
+        <h4>Bases de donnees</h4>
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Modelisation MCD/MLD</span>
+          <span class="tag">RGPD</span>
+        </div>
+      </div>
+      <div class="comp-bloc" style="margin-top:1.2rem;">
+        <h4>Gestion de projet data</h4>
+        <div class="tags">
+          <span class="tag">Cahier des charges</span>
+          <span class="tag">Diagramme de Gantt</span>
+          <span class="tag">Registre des risques</span>
+          <span class="tag">Veille technologique</span>
+          <span class="tag">Documentation</span>
+        </div>
+      </div>
+      <div class="comp-bloc" style="margin-top:1.2rem; grid-column: 1 / -1;">
+        <h4>Soft skills</h4>
+        <div class="tags">
+          <span class="tag soft">Rigueur analytique</span>
+          <span class="tag soft">Esprit critique</span>
+          <span class="tag soft">Communication visuelle</span>
+          <span class="tag soft">Orientation metier</span>
+          <span class="tag soft">Posture consultante</span>
+          <span class="tag soft">Pedagogie</span>
+          <span class="tag soft">Autonomie</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="section-inner">
+    <h2 class="section-title">Projets</h2>
+    <p class="section-sub">
+      10 projets realises durant ma certification Business Intelligence Analyst (OpenClassrooms),
+      plus le projet de portfolio en cours.
+    </p>
+    <div class="divider"></div>
+    <div class="projets-grid">
+
+      <div class="projet-card">
+        <h3>Demarrage formation BI</h3>
+        <p>Prise en main de l'environnement de formation, premiers reperes metier et outils de la BI.</p>
+        <div class="tags"><span class="tag">Onboarding</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">23 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Visualisation de donnees avec Excel</h3>
+        <p>Construction de graphiques dynamiques, tableaux croises dynamiques et premiers dashboards sous Excel.</p>
+        <div class="tags"><span class="tag">Excel</span><span class="tag">Dataviz</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">30 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Requetes SQL sur une base de donnees</h3>
+        <p>Interrogation d'une base relationnelle : jointures, agregations, sous-requetes et filtres complexes.</p>
+        <div class="tags"><span class="tag">SQL</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">30 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Collecte de donnees RGPD</h3>
+        <p>Conception d'un dispositif de collecte conforme RGPD : registre de traitement, analyse de risques, pseudonymisation.</p>
+        <div class="tags"><span class="tag">RGPD</span><span class="tag">Gouvernance</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">50 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Satisfaction client par SQL</h3>
+        <p>Base de donnees relationnelle pour le suivi client : modelisation MCD/MLD, requetes de KPI satisfaction.</p>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">MCD/MLD</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">50 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Nettoyage des donnees d'une boutique (P6 Bottleneck)</h3>
+        <p>Nettoyage et audit qualite de 3 sources (ERP, WEB, LIAISON). Detection des ruptures, analyse Pareto, heatmap de correlations. Notebook Python.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Dataviz</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">70 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Dashboard Power BI gestion de projet (P7 Sanitoral)</h3>
+        <p>Tableau de bord dynamique pour le suivi d'avancement de projets IT et Marketing. DAX, Power Query, modelisation etoile, alertes ecarts.</p>
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">70 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Analyse de donnees en Python</h3>
+        <p>Analyse exploratoire complete : nettoyage, statistiques descriptives, visualisations avancees et synthese des insights metier.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Seaborn</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">70 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Amelioration des performances (P9 Bottleneck Power BI)</h3>
+        <p>Dashboard Power BI 6 pages : CA, marges, stocks, promotions, gamme sans alcool. CA total 365 335 eur, taux de marge 47,35 %. Identification de 2 ruptures confirmes.</p>
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Analyse metier</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">70 h</span>
+      </div>
+
+      <div class="projet-card">
+        <h3>Segmentation marche et analyse business</h3>
+        <p>Analyse des segments de marche les plus pertinents pour un client : SWOT, PESTEL, recommandation strategique argumentee.</p>
+        <div class="tags"><span class="tag">Analyse strategique</span><span class="tag">Segmentation</span></div>
+        <span style="font-size:0.78rem;color:var(--gris);">70 h</span>
+      </div>
+
+      <div class="projet-card" style="border-color: var(--accent);">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <h3>Projet data augmente par l'IA et portfolio (P10)</h3>
+          <span class="badge-en-cours">En cours</span>
+        </div>
+        <p>
+          Amelioration du notebook Bottleneck par le Machine Learning (K-Means k=5 vs DBSCAN).
+          Segmentation predictive : 5 clusters produits, Cluster 4 = 195 produits a risque de rupture.
+          Score silhouette 0,4174. Documentation complete et creation du portfolio.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">K-Means</span>
+          <span class="tag">Veille IA</span>
+          <span class="tag">Portfolio</span>
+        </div>
+        <span style="font-size:0.78rem;color:var(--gris);">70 h - Sept. 2026</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VEILLE -->
+<section id="veille">
+  <div class="section-inner">
+    <h2 class="section-title">Veille metier et technologique</h2>
+    <p class="veille-intro">
+      Dans le cadre du projet P10, j'ai identifie, teste et compare des outils et methodes IA
+      selon 5 criteres : qualite, biais/fiabilite, rapidite, reproductibilite, securite/conformite.
+    </p>
+    <div class="divider"></div>
+    <div class="veille-grid">
+
+      <div class="veille-card">
+        <h4>Machine Learning : clustering produits</h4>
+        <p>K-Means (k=5) vs DBSCAN. Score silhouette K-Means 0,4174 vs DBSCAN 0,3574 (12 % de points bruit). K-Means retenu pour ses 5 segments actionnables et sa reproductibilite (random_state=42).</p>
+        <span class="veille-retenu">Retenu : K-Means k=5</span>
+        <span class="veille-ecarte" style="margin-left:0.4rem;">Ecarte : DBSCAN</span>
+      </div>
+
+      <div class="veille-card">
+        <h4>Assistance IA dans le workflow data</h4>
+        <p>Claude (Anthropic) utilise pour la comparaison d'algorithmes, la generation de code Python, l'interpretation des clusters et la redaction documentaire. Verification systematique des outputs, jamais sur donnees sensibles.</p>
+        <span class="veille-retenu">Retenu : Claude</span>
+      </div>
+
+      <div class="veille-card">
+        <h4>Data Visualisation et BI</h4>
+        <p>Power BI Desktop retenu pour sa coherence avec l'ecosysteme Microsoft et sa puissance DAX. Matplotlib et Seaborn pour les visualisations Python (heatmap, scatterplot segmentation).</p>
+        <span class="veille-retenu">Retenu : Power BI + Matplotlib/Seaborn</span>
+      </div>
+
+      <div class="veille-card">
+        <h4>Qualite et reproductibilite du code</h4>
+        <p>random_state=42 systematique sur tous les appels KMeans. StandardScaler obligatoire quand les variables sont d'echelles differentes (euros vs unites vs ratio). Imputation par mediane si valeurs manquantes infer. a 5 %.</p>
+        <span class="veille-retenu">Critere : reproductibilite</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIVRABLES P10 -->
+<section id="livrables">
+  <div class="section-inner">
+    <h2 class="section-title">Livrables P10</h2>
+    <p class="section-sub">Documents produits dans le cadre du projet data augmente par l'IA.</p>
+    <div class="divider"></div>
+    <div class="livrables-list">
+      <div class="livrable-row">
+        <span class="livrable-nom">Notebook Python enrichi (V3 avec K-Means)</span>
+        <a href="New_projet_bottleneck_dounya_V3.ipynb" class="livrable-lien">Voir le notebook</a>
+      </div>
+      <div class="livrable-row">
+        <span class="livrable-nom">Documentation P10 (veille, cahier des charges, pilotage, traçabilite)</span>
+        <a href="El_Aoud_Dounya_2-_documentation_082026.docx" class="livrable-lien">Voir le document</a>
+      </div>
+      <div class="livrable-row">
+        <span class="livrable-nom">Comparaison V2 vs V3 (annotations des changements)</span>
+        <a href="Comparaison_V2_V3_ElAoud_Dounya.docx" class="livrable-lien">Voir le document</a>
+      </div>
+      <div class="livrable-row">
+        <span class="livrable-nom">Export Cluster 4 (195 produits a risque de rupture)</span>
+        <a href="cluster4.csv" class="livrable-lien">Voir le CSV</a>
+      </div>
+      <div class="livrable-row">
+        <span class="livrable-nom">Dashboard Power BI Bottleneck (P9)</span>
+        <a href="#" class="livrable-lien">Voir le dashboard</a>
+      </div>
+      <div class="livrable-row">
+        <span class="livrable-nom">Presentation soutenance P10</span>
+        <a href="#" class="livrable-lien">Voir les slides</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p>Disponible pour des opportunites en Business Intelligence ou Business Analyst<br>dans la region Mulhouse / Strasbourg / Alsace.</p>
+  <div class="contact-links">
+    <a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/" target="_blank">GitHub</a>
+    <a href="mailto:dounya.elaoud@email.com">Email</a>
+  </div>
+</section>
+
+<footer>
+  Dounya El Aoud &mdash; Portfolio Business Intelligence Analyst &mdash; 2026
+</footer>
+
+</body>
+</html>
